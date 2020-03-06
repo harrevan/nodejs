@@ -3,9 +3,12 @@ const path = require('path')
 var app = express();
 const PORT = process.env.PORT || 5000
 
-app.use(express.static("public"));
-app.set("views", "views");
+app.use(express.static(path.join(_dirname,"public")));
+app.set("views", path.join(_dirname,"views"));
 app.set("view engine", "ejs");
+app.get("/mail_form", function(req,res){
+	res.render("mail_form");
+});
 
 app.get("/calculate", function(req,res){
     var mail_type = req.query.mail;
@@ -182,4 +185,3 @@ function calculateRate(type, weight){
 		return array;
 	}
 }
-
